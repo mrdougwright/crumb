@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "scripts": {
-    "build": "esbuild src/index.js --bundle --minify --outfile=dist/index.js",
-    "dev": "esbuild src/index.js --bundle --sourcemap --outfile=dist/index.js --watch"
+    "build": "esbuild src/index.js --bundle --minify --format=iife --outfile=dist/index.js",
+    "dev": "esbuild src/index.js --bundle --outfile=dist/index.js --watch --format=iife --global-name=crumb"
   },
   "devDependencies": {
     "esbuild": "^0.25.2"

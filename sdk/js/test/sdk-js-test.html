@@ -8,15 +8,17 @@
     <h1>Crumb Test Page</h1>
     <button onclick="sendEvent()">Send Event</button>
 
-    <script src="./sdk/js/dist/index.js"></script>
+    <script src="/sdk/js/dist/index.js"></script>
     <script>
+      console.log("Crumb loaded:", crumb);
+
       crumb.init({
-        serverUrl: "http://localhost:4000",
+        serverUrl: "http://localhost:4000/api",
         userId: "abc123",
       });
 
       function sendEvent() {
-        crumb.track("Hello World", { test: true });
+        crumb.track("Signup Completed", { plan: "pro" });
         console.log("Event sent!");
       }
     </script>
