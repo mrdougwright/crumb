@@ -7,6 +7,8 @@ defmodule CrumbServerWeb.Router do
 
   scope "/api", CrumbServerWeb do
     pipe_through :api
+
+    post "/track", EventController, :track
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
