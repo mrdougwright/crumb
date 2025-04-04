@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Crumb Test</title>
+  </head>
+  <body>
+    <h1>Crumb Test Page</h1>
+    <button onclick="sendEvent()">Send Event</button>
+
+    <script src="./sdk/js/dist/index.js"></script>
+    <script>
+      crumb.init({
+        serverUrl: "http://localhost:4000",
+        userId: "abc123",
+      });
+
+      function sendEvent() {
+        crumb.track("Hello World", { test: true });
+        console.log("Event sent!");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "@crumb/sdk",
+  "version": "0.1.0",
+  "description": "JavaScript SDK for Crumb",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --minify --outfile=dist/index.js",
+    "dev": "esbuild src/index.js --bundle --sourcemap --outfile=dist/index.js --watch"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.2"
+  }
+}
