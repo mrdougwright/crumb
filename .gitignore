@@ -11,10 +11,11 @@ erl_crash.dump
 crumb_server-*.tar
 
 ## Environment
-.env
+/envs/*.env
+!/envs/.env.example
 config/dev.secret.exs
 config/runtime.exs
 
 ## JS SDKs
-/sdk/**/dist
-/sdk/**/node_modules
+/sdk/js/dist
+/sdk/js/node_modules

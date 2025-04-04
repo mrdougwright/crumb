@@ -1,4 +1,22 @@
 import Config
+import Dotenvy
+
+# Dotenvy stuff
+env_dir_prefix = System.get_env("RELEASE_ROOT") || Path.expand("./envs")
+source!([
+  Path.absname(".env", env_dir_prefix),
+  Path.absname("#{config_env()}.env", env_dir_prefix),
+  System.get_env()
+])
+
+config :crumb_server, CrumbServer.Repo,
+  database: env!("DATABASE", :string!),
+  username: env!("USERNAME", :string!),
+  password: env!("PASSWORD", :string!),
+  hostname: env!("HOSTNAME", :string!),
+  port: env!("PORT", :integer, 5432),
+  pool_size: env!("POOL_SIZE", :integer, 10),
+  adapter: Ecto.Adapters.Postgres
 
 # config/runtime.exs is executed for all environments, including
 # during releases. It is executed after compilation and before the

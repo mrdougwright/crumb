@@ -2,13 +2,10 @@ import Config
 
 # Configure your database
 config :crumb_server, CrumbServer.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  database: "crumb_server_dev",
-  stacktrace: true,
   show_sensitive_data_on_connection_error: true,
-  pool_size: 10
+  hostname: "localhost",
+  pool_size: 10,
+  stacktrace: true
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
