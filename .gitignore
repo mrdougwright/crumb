@@ -1,0 +1,20 @@
+## Elixir
+/_build/
+/deps/
+*.ez
+*.beam
+erl_crash.dump
+/cover/
+/doc/
+/.fetch
+/tmp/
+crumb_server-*.tar
+
+## Environment
+.env
+config/dev.secret.exs
+config/runtime.exs
+
+## JS SDKs
+/sdk/**/dist
+/sdk/**/node_modules
