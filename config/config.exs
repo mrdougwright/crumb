@@ -7,19 +7,19 @@
 # General application configuration
 import Config
 
-config :crumb_server,
-  ecto_repos: [CrumbServer.Repo],
+config :crumb,
+  ecto_repos: [Crumb.Repo],
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
-config :crumb_server, CrumbServerWeb.Endpoint,
+config :crumb, CrumbWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [json: CrumbServerWeb.ErrorJSON],
+    formats: [json: CrumbWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: CrumbServer.PubSub,
+  pubsub_server: Crumb.PubSub,
   live_view: [signing_salt: "bBzvr5xr"]
 
 # Configures the mailer
@@ -29,7 +29,7 @@ config :crumb_server, CrumbServerWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :crumb_server, CrumbServer.Mailer, adapter: Swoosh.Adapters.Local
+config :crumb, Crumb.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configures Elixir's Logger
 config :logger, :console,

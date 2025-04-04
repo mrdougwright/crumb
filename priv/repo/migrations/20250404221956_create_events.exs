@@ -1,4 +1,4 @@
-defmodule CrumbServer.Repo.Migrations.CreateEvents do
+defmodule Crumb.Repo.Migrations.CreateEvents do
   use Ecto.Migration
 
   def change do

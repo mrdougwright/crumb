@@ -8,7 +8,7 @@ erl_crash.dump
 /doc/
 /.fetch
 /tmp/
-crumb_server-*.tar
+crumb-*.tar
 
 ## Environment
 /envs/*.env

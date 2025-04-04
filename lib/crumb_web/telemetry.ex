@@ -1,4 +1,4 @@
-defmodule CrumbServerWeb.Telemetry do
+defmodule CrumbWeb.Telemetry do
   use Supervisor
   import Telemetry.Metrics
 
@@ -53,23 +53,23 @@ defmodule CrumbServerWeb.Telemetry do
       ),
 
       # Database Metrics
-      summary("crumb_server.repo.query.total_time",
+      summary("crumb.repo.query.total_time",
         unit: {:native, :millisecond},
         description: "The sum of the other measurements"
       ),
-      summary("crumb_server.repo.query.decode_time",
+      summary("crumb.repo.query.decode_time",
         unit: {:native, :millisecond},
         description: "The time spent decoding the data received from the database"
       ),
-      summary("crumb_server.repo.query.query_time",
+      summary("crumb.repo.query.query_time",
         unit: {:native, :millisecond},
         description: "The time spent executing the query"
       ),
-      summary("crumb_server.repo.query.queue_time",
+      summary("crumb.repo.query.queue_time",
         unit: {:native, :millisecond},
         description: "The time spent waiting for a database connection"
       ),
-      summary("crumb_server.repo.query.idle_time",
+      summary("crumb.repo.query.idle_time",
         unit: {:native, :millisecond},
         description:
           "The time the connection spent waiting before being checked out for the query"
@@ -87,7 +87,7 @@ defmodule CrumbServerWeb.Telemetry do
     [
       # A module, function and arguments to be invoked periodically.
       # This function must call :telemetry.execute/3 and a metric must be added above.
-      # {CrumbServerWeb, :count_users, []}
+      # {CrumbWeb, :count_users, []}
     ]
   end
 end

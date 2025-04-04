@@ -1,12 +1,12 @@
-defmodule CrumbServerWeb do
+defmodule CrumbWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, components, channels, and so on.
 
   This can be used in your application as:
 
-      use CrumbServerWeb, :controller
-      use CrumbServerWeb, :html
+      use CrumbWeb, :controller
+      use CrumbWeb, :html
 
   The definitions below will be executed for every controller,
   component, etc, so keep them short and clean, focused
@@ -39,9 +39,9 @@ defmodule CrumbServerWeb do
     quote do
       use Phoenix.Controller,
         formats: [:html, :json],
-        layouts: [html: CrumbServerWeb.Layouts]
+        layouts: [html: CrumbWeb.Layouts]
 
-      use Gettext, backend: CrumbServerWeb.Gettext
+      use Gettext, backend: CrumbWeb.Gettext
 
       import Plug.Conn
 
@@ -52,9 +52,9 @@ defmodule CrumbServerWeb do
   def verified_routes do
     quote do
       use Phoenix.VerifiedRoutes,
-        endpoint: CrumbServerWeb.Endpoint,
-        router: CrumbServerWeb.Router,
-        statics: CrumbServerWeb.static_paths()
+        endpoint: CrumbWeb.Endpoint,
+        router: CrumbWeb.Router,
+        statics: CrumbWeb.static_paths()
     end
   end
 

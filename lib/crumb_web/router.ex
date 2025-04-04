@@ -1,18 +1,18 @@
-defmodule CrumbServerWeb.Router do
-  use CrumbServerWeb, :router
+defmodule CrumbWeb.Router do
+  use CrumbWeb, :router
 
   pipeline :api do
     plug :accepts, ["json"]
   end
 
-  scope "/api", CrumbServerWeb do
+  scope "/api", CrumbWeb do
     pipe_through :api
 
     post "/track", EventController, :track
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
-  if Application.compile_env(:crumb_server, :dev_routes) do
+  if Application.compile_env(:crumb, :dev_routes) do
     # If you want to use the LiveDashboard in production, you should put
     # it behind authentication and allow only admins to access it.
     # If your application does not have an admins-only section yet,
@@ -23,7 +23,7 @@ defmodule CrumbServerWeb.Router do
     scope "/dev" do
       pipe_through [:fetch_session, :protect_from_forgery]
 
-      live_dashboard "/dashboard", metrics: CrumbServerWeb.Telemetry
+      live_dashboard "/dashboard", metrics: CrumbWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end

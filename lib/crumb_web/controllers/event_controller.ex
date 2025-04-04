@@ -1,8 +1,8 @@
-defmodule CrumbServerWeb.EventController do
-  use CrumbServerWeb, :controller
+defmodule CrumbWeb.EventController do
+  use CrumbWeb, :controller
 
-  alias CrumbServer.Events.Event
-  alias CrumbServer.Repo
+  alias Crumb.Events.Event
+  alias Crumb.Repo
 
   def track(conn, %{"event" => event, "properties" => props, "userId" => user_id}) do
     changeset =

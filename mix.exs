@@ -1,9 +1,9 @@
-defmodule CrumbServer.MixProject do
+defmodule Crumb.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :crumb_server,
+      app: :crumb,
       version: "0.1.0",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -18,7 +18,7 @@ defmodule CrumbServer.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {CrumbServer.Application, []},
+      mod: {Crumb.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

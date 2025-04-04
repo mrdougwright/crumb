@@ -1,12 +1,12 @@
-defmodule CrumbServerWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :crumb_server
+defmodule CrumbWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :crumb
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
-    key: "_crumb_server_key",
+    key: "_crumb_key",
     signing_salt: "MYpvE0hI",
     same_site: "Lax"
   ]
@@ -21,15 +21,15 @@ defmodule CrumbServerWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :crumb_server,
+    from: :crumb,
     gzip: false,
-    only: CrumbServerWeb.static_paths()
+    only: CrumbWeb.static_paths()
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
     plug Phoenix.CodeReloader
-    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :crumb_server
+    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :crumb
   end
 
   plug CORSPlug
@@ -49,5 +49,5 @@ defmodule CrumbServerWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug CrumbServerWeb.Router
+  plug CrumbWeb.Router
 end

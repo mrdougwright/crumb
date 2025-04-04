@@ -1,4 +1,4 @@
-defmodule CrumbServer.Event do
+defmodule Crumb.Events.Event do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -7,10 +7,9 @@ defmodule CrumbServer.Event do
     field :user_id, :string
     field :properties, :map
 
-    timestamps(type: :utc_datetime)
+    timestamps()
   end
 
-  @doc false
   def changeset(event, attrs) do
     event
     |> cast(attrs, [:event, :user_id, :properties])
