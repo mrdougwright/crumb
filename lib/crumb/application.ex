@@ -17,7 +17,8 @@ defmodule Crumb.Application do
       # Start a worker by calling: Crumb.Worker.start_link(arg)
       # {Crumb.Worker, arg},
       # Start to serve requests, typically the last entry
-      CrumbWeb.Endpoint
+      CrumbWeb.Endpoint,
+      Crumb.Queue
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

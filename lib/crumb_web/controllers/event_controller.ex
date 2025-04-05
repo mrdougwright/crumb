@@ -13,7 +13,8 @@ defmodule CrumbWeb.EventController do
       })
 
     case Repo.insert(changeset) do
-      {:ok, _event} ->
+      {:ok, event} ->
+        Crumb.Queue.enqueue(event)
         json(conn, %{status: "ok"})
 
       {:error, changeset} ->
