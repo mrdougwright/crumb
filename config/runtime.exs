@@ -2,13 +2,11 @@ import Config
 import Dotenvy
 
 # Dotenvy stuff
-env_dir_prefix = System.get_env("RELEASE_ROOT") || Path.expand("./envs")
-
 source!([
-  Path.absname(".env", env_dir_prefix),
-  Path.absname("#{config_env()}.env", env_dir_prefix),
+  Path.absname(".env", Path.expand(".")),
   System.get_env()
 ])
+|> Enum.each(fn {key, val} -> System.put_env(key, val) end)
 
 config :crumb, Crumb.Repo,
   database: env!("DATABASE", :string!),

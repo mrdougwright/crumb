@@ -42,11 +42,12 @@ defmodule Crumb.MixProject do
       {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.26"},
-      {:jason, "~> 1.2"},
+      {:jason, "~> 1.4"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
-      {:dotenvy, "~> 1.0.0"},
-      {:cors_plug, "~> 3.0"}
+      {:dotenvy, "~> 1.0"},
+      {:cors_plug, "~> 3.0"},
+      {:httpoison, "~> 2.2"}
     ]
   end
 

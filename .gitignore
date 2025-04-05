@@ -11,8 +11,7 @@ erl_crash.dump
 crumb-*.tar
 
 ## Environment
-/envs/*.env
-!/envs/.env.example
+.env
 config/dev.secret.exs
 config/runtime.exs
 
