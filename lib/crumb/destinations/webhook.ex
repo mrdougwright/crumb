@@ -7,6 +7,8 @@ defmodule Crumb.Destination.Webhook do
     System.get_env("FORWARD_WEBHOOK_URL") != nil
   end
 
+  def transform(event), do: event
+
   def send_event(event) do
     url = System.get_env("FORWARD_WEBHOOK_URL")
 

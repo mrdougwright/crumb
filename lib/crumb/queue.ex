@@ -33,8 +33,9 @@ defmodule Crumb.Queue do
 
   defp forward_event(event) do
     Enum.each(@destinations, fn mod ->
-      with true <- mod.enabled?() do
-        case mod.send_event(event) do
+      with true <- mod.enabled?(),
+           transformed <- mod.transform(event) do
+        case mod.send_event(transformed) do
           {:ok, _response} -> :ok
           {:error, reason} -> Logger.warning("❌ #{inspect(mod)} failed: #{inspect(reason)}")
         end

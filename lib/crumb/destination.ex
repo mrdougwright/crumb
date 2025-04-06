@@ -1,8 +1,11 @@
 defmodule Crumb.Destination do
   @moduledoc """
-  enabled?/0 → should Crumb call it?
-  send_event/1 → do the actual sending
+  Check if destination is enabled (user has set env key).
+  Transform data if/where needed for destination.
+  Send event to destination (response ignored).
   """
+
   @callback enabled?() :: boolean()
+  @callback transform(map()) :: map()
   @callback send_event(map()) :: {:ok, HTTPoison.Response.t()} | {:error, term()}
 end
