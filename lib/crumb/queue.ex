@@ -3,7 +3,8 @@ defmodule Crumb.Queue do
   require Logger
 
   @destinations [
-    Crumb.Destination.Webhook
+    Crumb.Destination.Webhook,
+    Crumb.Destination.Mixpanel
   ]
 
   def start_link(_opts) do
@@ -34,7 +35,7 @@ defmodule Crumb.Queue do
     Enum.each(@destinations, fn mod ->
       with true <- mod.enabled?() do
         case mod.send_event(event) do
-          :ok -> :ok
+          {:ok, _response} -> :ok
           {:error, reason} -> Logger.warning("❌ #{inspect(mod)} failed: #{inspect(reason)}")
         end
       end

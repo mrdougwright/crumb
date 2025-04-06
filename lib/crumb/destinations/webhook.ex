@@ -16,7 +16,6 @@ defmodule Crumb.Destination.Webhook do
 
       Logger.debug("📤 Sending to Webhook: #{url}")
       HTTPoison.post(url, body, headers)
-      :ok
     else
       {:error, :no_url}
     end

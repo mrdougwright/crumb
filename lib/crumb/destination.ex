@@ -4,5 +4,5 @@ defmodule Crumb.Destination do
   send_event/1 → do the actual sending
   """
   @callback enabled?() :: boolean()
-  @callback send_event(map()) :: :ok | {:error, term()}
+  @callback send_event(map()) :: {:ok, HTTPoison.Response.t()} | {:error, term()}
 end
