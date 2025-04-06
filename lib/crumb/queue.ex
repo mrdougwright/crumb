@@ -1,7 +1,10 @@
 defmodule Crumb.Queue do
   use GenServer
-
   require Logger
+
+  @destinations [
+    Crumb.Destination.Webhook
+  ]
 
   def start_link(_opts) do
     GenServer.start_link(__MODULE__, %{}, name: __MODULE__)
@@ -28,22 +31,13 @@ defmodule Crumb.Queue do
   end
 
   defp forward_event(event) do
-    url = System.get_env("FORWARD_WEBHOOK_URL")
-
-    if url do
-      body = %{
-        event: event.event,
-        properties: event.properties,
-        user_id: event.user_id,
-        sent_at: DateTime.utc_now()
-      }
-
-      headers = [{"Content-Type", "application/json"}]
-
-      Logger.debug("🚀 Forwarding to #{url}")
-      HTTPoison.post(url, Jason.encode!(body), headers)
-    else
-      Logger.warning("⚠️ No FORWARD_WEBHOOK_URL configured.")
-    end
+    Enum.each(@destinations, fn mod ->
+      with true <- mod.enabled?() do
+        case mod.send_event(event) do
+          :ok -> :ok
+          {:error, reason} -> Logger.warning("❌ #{inspect(mod)} failed: #{inspect(reason)}")
+        end
+      end
+    end)
   end
 end
