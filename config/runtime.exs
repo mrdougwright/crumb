@@ -4,6 +4,7 @@ import Dotenvy
 # Dotenvy stuff
 source!([
   Path.absname(".env", Path.expand(".")),
+  Path.absname("#{config_env()}.env", Path.expand("./test")),
   System.get_env()
 ])
 |> Enum.each(fn {key, val} -> System.put_env(key, val) end)
