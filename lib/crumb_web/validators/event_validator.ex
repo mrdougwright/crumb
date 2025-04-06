@@ -16,7 +16,8 @@ defmodule CrumbWeb.Validators.EventValidator do
     types = %{
       event: :string,
       user_id: :string,
-      properties: :map
+      properties: :map,
+      inserted_at: :utc_datetime
     }
 
     {%{}, types}
