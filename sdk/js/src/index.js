@@ -33,9 +33,13 @@
       });
   }
 
-  // Define global
-  window.crumb = {
-    init,
-    track,
-  };
+  const crumb = { init, track };
+
+  if (typeof window !== "undefined") {
+    window.crumb = crumb;
+  }
+
+  if (typeof module !== "undefined") {
+    module.exports = crumb; // CommonJS support
+  }
 })();

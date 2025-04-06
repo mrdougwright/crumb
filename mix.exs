@@ -62,6 +62,7 @@ defmodule Crumb.MixProject do
       setup: ["deps.get", "ecto.setup"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
+      "test.js": ["cmd npm --prefix sdk/js run test:mx"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
     ]
   end
