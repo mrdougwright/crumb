@@ -8,26 +8,38 @@ describe("Crumb SDK", () => {
   });
 
   test("init sets window config", () => {
-    crumb.init({ serverUrl: "http://localhost:4000", userId: "abc123" });
+    crumb.init({
+      apiKey: "test-key",
+      serverUrl: "http://localhost:4000",
+      userId: "abc123",
+    });
 
     expect(window.__crumb_config).toEqual({
+      apiKey: "test-key",
       serverUrl: "http://localhost:4000",
       userId: "abc123",
     });
   });
 
   test("track calls fetch with event payload", async () => {
-    crumb.init({ serverUrl: "http://localhost:4000", userId: "abc123" });
+    crumb.init({
+      apiKey: "test-key",
+      serverUrl: "http://localhost:4000",
+      userId: "abc123",
+    });
 
-    await crumb.track("Test Event", { foo: "bar" });
+    crumb.track("Test Event", { foo: "bar" });
 
     expect(fetch).toHaveBeenCalledWith(
       "http://localhost:4000/track",
       expect.objectContaining({
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: expect.any(String),
-      })
+        headers: {
+          Authorization: "Bearer test-key",
+          "Content-Type": "application/json",
+        },
+        body: expect.stringContaining(`"event":"Test Event"`),
+      }),
     );
   });
 });

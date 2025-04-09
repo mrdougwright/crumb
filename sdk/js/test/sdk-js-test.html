@@ -1,26 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Crumb Test</title>
-  </head>
-  <body>
-    <h1>Crumb Test Page</h1>
-    <button onclick="sendEvent()">Send Event</button>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Crumb Test</title>
+    </head>
+    <body>
+        <h1>Crumb Test Page</h1>
+        <button onclick="sendEvent()">Send Event</button>
 
-    <script src="/sdk/js/dist/index.js"></script>
-    <script>
-      console.log("Crumb loaded:", crumb);
+        <script src="/sdk/js/dist/index.js"></script>
+        <script>
+            console.log("Crumb loaded:", crumb);
 
-      crumb.init({
-        serverUrl: "http://localhost:4000/api",
-        userId: "abc123",
-      });
+            crumb.init({
+                apiKey: "abc123",
+                serverUrl: "http://localhost:4000/api",
+                userId: "abc123",
+            });
 
-      function sendEvent() {
-        crumb.track("Signup Completed", { plan: "pro" });
-        console.log("Event sent!");
-      }
-    </script>
-  </body>
+            function sendEvent() {
+                crumb.track("Signup Completed", { plan: "pro" });
+                console.log("Event sent!");
+            }
+        </script>
+    </body>
 </html>

@@ -2,6 +2,7 @@
   function init(options) {
     console.log("[Crumb SDK] init called with:", options);
     window.__crumb_config = {
+      apiKey: options.apiKey,
       serverUrl: options.serverUrl,
       userId: options.userId,
     };
@@ -9,6 +10,10 @@
 
   function track(event, properties = {}) {
     const config = window.__crumb_config || {};
+    if (!config.apiKey) {
+      console.warn("[Crumb SDK] apiKey not set");
+      return;
+    }
     if (!config.serverUrl) {
       console.warn("[Crumb SDK] serverUrl not set");
       return;
@@ -22,7 +27,10 @@
 
     fetch(`${config.serverUrl}/track`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        Authorization: `Bearer ${config.apiKey}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(payload),
     })
       .then((res) => {
