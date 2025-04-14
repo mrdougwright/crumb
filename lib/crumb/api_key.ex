@@ -1,11 +1,8 @@
 defmodule Crumb.ApiKey do
   @moduledoc """
-  API Key is for end users of the system, per project, to authenticate
-  an incoming request to the Crumb server. It should be:
-  🔒 Write-only: can only send events
-  🔒 Project-scoped: key only belongs to one project
-  ✅ Safe to expose publicly in the browser
-  🚫 No read, update, or admin powers
+  API Key is per project, to authenticate an incoming request to the Crumb server.
+  You can generate a new API key using the `mix crumb.gen.api_key <my_project>` command.
+  Tokens are not hashed for security, they are simply stored in your database.
   """
 
   use Ecto.Schema

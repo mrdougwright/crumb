@@ -3,6 +3,7 @@ defmodule CrumbWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug CrumbWeb.Plugs.AuthorizeApiKey
   end
 
   scope "/api", CrumbWeb do

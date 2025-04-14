@@ -2,7 +2,6 @@ defmodule CrumbWeb.EventController do
   use CrumbWeb, :controller
 
   alias Crumb.Events
-  plug CrumbWeb.Plugs.AuthorizeApiKey
 
   def track(conn, params) do
     result =
