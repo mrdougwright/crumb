@@ -15,6 +15,10 @@ defmodule Crumb.Queue do
     GenServer.cast(__MODULE__, {:enqueue, event})
   end
 
+  def identify(event) do
+    GenServer.cast(__MODULE__, {:identify, event})
+  end
+
   @impl true
   def init(_state) do
     {:ok, %{}}
@@ -23,10 +27,15 @@ defmodule Crumb.Queue do
   @impl true
   def handle_cast({:enqueue, event}, state) do
     Logger.debug("📦 Received event: #{inspect(event.event)}")
+    Task.start(fn -> forward_event(event) end)
 
-    Task.start(fn ->
-      forward_event(event)
-    end)
+    {:noreply, state}
+  end
+
+  @impl true
+  def handle_cast({:identify, data}, state) do
+    Logger.debug("Received traits: #{inspect(data.traits)}")
+    Task.start(fn -> forward_event(data) end)
 
     {:noreply, state}
   end

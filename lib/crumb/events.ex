@@ -17,9 +17,14 @@ defmodule Crumb.Events do
 
   def insert({:error, _} = err), do: err
 
-  def enqueue({:ok, event}) do
-    Crumb.Queue.enqueue(event)
-    {:ok, event}
+  def enqueue({:ok, data}, :event) do
+    Crumb.Queue.enqueue(data)
+    {:ok, data}
+  end
+
+  def enqueue({:ok, data}, :identify) do
+    Crumb.Queue.identify(data)
+    {:ok, data}
   end
 
   def enqueue({:error, _} = err), do: err

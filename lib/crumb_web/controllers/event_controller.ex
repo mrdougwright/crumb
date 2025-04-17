@@ -9,7 +9,7 @@ defmodule CrumbWeb.EventController do
       params
       |> Validator.validate()
       |> Events.insert()
-      |> Events.enqueue()
+      |> Events.enqueue(:event)
 
     case result do
       {:ok, event} ->
@@ -26,7 +26,7 @@ defmodule CrumbWeb.EventController do
     result =
       params
       |> Validator.validate()
-      |> Events.enqueue()
+      |> Events.enqueue(:identify)
 
     case result do
       {:ok, _idf} ->
