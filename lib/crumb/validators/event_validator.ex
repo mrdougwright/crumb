@@ -1,4 +1,4 @@
-defmodule CrumbWeb.Validators.EventValidator do
+defmodule Crumb.Validators.EventValidator do
   @moduledoc """
   Validate incoming events. Example payload (normalized before validation):
   ```

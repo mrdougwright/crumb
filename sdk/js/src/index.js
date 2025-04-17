@@ -8,40 +8,46 @@
     };
   }
 
-  function track(event, properties = {}) {
-    const config = window.__crumb_config || {};
-    if (!config.apiKey) {
-      console.warn("[Crumb SDK] apiKey not set");
-      return;
-    }
-    if (!config.serverUrl) {
-      console.warn("[Crumb SDK] serverUrl not set");
-      return;
-    }
+  function send(path, payload) {
+    const { apiKey, serverUrl } = window.__crumb_config;
+    console.log(`[Crumb SDK] sending to /${path}:`, payload);
 
-    const payload = {
-      event,
-      properties,
-      userId: config.userId,
-    };
-
-    fetch(`${config.serverUrl}/track`, {
+    return fetch(`${serverUrl}/${path}`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${config.apiKey}`,
         "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify(payload),
     })
       .then((res) => {
         console.log("[Crumb SDK] response:", res.status);
+        return res;
       })
       .catch((err) => {
         console.error("[Crumb SDK] error:", err);
+        throw err;
       });
   }
 
-  const crumb = { init, track };
+  function track({ event, properties = {} }) {
+    return send("track", {
+      type: "track",
+      event,
+      properties,
+      userId: window.__crumb_config.userId,
+    });
+  }
+
+  function identify({ traits = {} }) {
+    return send("identify", {
+      type: "identify",
+      traits,
+      userId: window.__crumb_config.userId,
+    });
+  }
+
+  const crumb = { init, track, identify };
 
   if (typeof window !== "undefined") {
     window.crumb = crumb;

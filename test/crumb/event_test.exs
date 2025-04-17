@@ -3,38 +3,12 @@ defmodule Crumb.EventsTest do
 
   alias Crumb.Events
   alias Crumb.Events.Event
-
-  describe "validate/1" do
-    test "valid input returns {:ok, clean_params}" do
-      params = %{
-        "event" => "user_signup",
-        "userId" => "abc123",
-        "properties" => %{}
-      }
-
-      assert {:ok, clean_params} = Events.validate(params)
-      assert clean_params.event == "user_signup"
-      assert clean_params.user_id == "abc123"
-      assert is_map(clean_params.properties)
-      assert Map.has_key?(clean_params, :inserted_at)
-    end
-
-    test "missing required fields returns {:error, changeset}" do
-      params = %{
-        "properties" => %{}
-      }
-
-      assert {:error, changeset} = Events.validate(params)
-      assert changeset.valid? == false
-      assert ["can't be blank"] = errors_on(changeset).event
-      assert ["can't be blank"] = errors_on(changeset).user_id
-    end
-  end
+  alias Crumb.Validator
 
   describe "insert/1" do
     test "inserts a valid event" do
       {:ok, params} =
-        Events.validate(%{
+        Validator.validate(%{
           "event" => "test_insert",
           "userId" => "user-1",
           "properties" => %{}
@@ -55,7 +29,7 @@ defmodule Crumb.EventsTest do
   describe "enqueue/1" do
     test "calls Crumb.Queue.enqueue/1 with event" do
       {:ok, params} =
-        Events.validate(%{
+        Validator.validate(%{
           "event" => "to_enqueue",
           "userId" => "user-2",
           "properties" => %{}

@@ -9,6 +9,7 @@ defmodule CrumbWeb.Router do
   scope "/api", CrumbWeb do
     pipe_through :api
 
+    post "/identify", EventController, :identify
     post "/track", EventController, :track
   end
 
