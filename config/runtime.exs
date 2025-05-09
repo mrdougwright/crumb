@@ -40,9 +40,9 @@ end
 
 if config_env() == :prod do
   database_url =
-    System.get_env("DATABASE_URL") ||
+    System.get_env("DATABASE") ||
       raise """
-      environment variable DATABASE_URL is missing.
+      environment variable DATABASE is missing.
       For example: ecto://USER:PASS@HOST/DATABASE
       """
 
@@ -81,6 +81,7 @@ if config_env() == :prod do
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
       port: port
     ],
+    server: true,
     secret_key_base: secret_key_base
 
   # ## SSL Support

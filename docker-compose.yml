@@ -4,7 +4,9 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      DATABASE_URL: ecto://postgres:postgres@db/crumb_prod
+      DATABASE: ecto://postgres:postgres@db:5432/crumb_prod
+      USERNAME: postgres
+      PASSWORD: postgres
       SECRET_KEY_BASE: a_very_secret_key_that_you_generate
       PHX_HOST: localhost
       PORT: 4000

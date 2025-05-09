@@ -23,13 +23,11 @@ COPY config config
 RUN mix deps.get --only prod
 RUN mix deps.compile
 
-COPY assets assets
 COPY priv priv
 COPY lib lib
 
 # Compile and digest assets
 RUN mix compile
-RUN mix assets.deploy
 
 # Release the app
 RUN mix release
