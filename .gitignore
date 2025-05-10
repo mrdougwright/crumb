@@ -13,7 +13,6 @@ crumb-*.tar
 ## Environment
 .env
 config/dev.secret.exs
-config/runtime.exs
 
 ## JS SDKs
 /sdk/js/dist
